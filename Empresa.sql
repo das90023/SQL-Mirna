@@ -1,0 +1,34 @@
+CREATE DATABASE EMPRESA_20250711
+GO
+USE EMPRESA_20250711
+GO
+ 
+ 
+ 
+CREATE TABLE Area1(
+id_Area INT IDENTITY (100,1) PRIMARY KEY,
+nombre VARCHAR (100));
+ 
+ 
+CREATE TABLE Personal1(
+id_Personal INT IDENTITY (1,1) PRIMARY KEY,
+nombre VARCHAR (100) NOT NULL,
+apellido VARCHAR (100) NOT NULL,
+salario INT NOT NULL,
+edad INT CHECK (edad >= 18) NOT NULL);
+ 
+ 
+SELECT *FROM Area1
+SELECT *FROM Personal1
+ 
+INSERT INTO Area1 VALUES
+('AREA A'),
+('AREA B'),
+('AREA C');
+
+
+INSERT INTO Personal1 VALUES
+('Orlando','Zavala',2500,18),
+('Oscar','Vasquez',2600,16),
+('Walter','Ramirez',14,20),
+('Hessem','Santos',100000,25);
