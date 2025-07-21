@@ -5,16 +5,19 @@ GO
 USE TIENDA_20250711
 GO
 
+--CREANDO TABLA PROVEEDORES
 CREATE TABLE Proveedores (
 idProveedor INT IDENTITY (1,1) PRIMARY KEY,
 nombreProveedor VARCHAR (100) NOT NULL);
 
+--CREANDO TABLA MARCA
 CREATE TABLE Marca (
 idMarca INT IDENTITY (1,1) PRIMARY KEY,
 nombreMarca VARCHAR (100) NOT NULL,
 id_Proveedor INT NOT NULL,
 CONSTRAINT FKPROVEEDOR FOREIGN KEY (id_Proveedor) REFERENCES Proveedores (idProveedor) ON DELETE CASCADE);
 
+--CREANDO TABLA PRODUCTO
 CREATE TABLE Producto (
 idProducto INT IDENTITY (1,1) PRIMARY KEY,
 nombreProducto VARCHAR (100) NOT NULL,
@@ -22,22 +25,23 @@ id_Marca INT NOT NULL,
 precioProducto DECIMAL (7,2) NOT NULL,
 CONSTRAINT FKMARCA FOREIGN KEY (id_Marca) REFERENCES Marca (idMarca) ON DELETE CASCADE);
 
+--MOSTRANDO INSERT'S
 SELECT *FROM Proveedores
 SELECT *FROM Marca
 SELECT *FROM Producto
 
+--AGREGANDO REGISTROS
 INSERT INTO Proveedores VALUES 
 ('ORLANDO'),
 ('OSCAR');
-
+--AGREGANDO REGISTROS
 INSERT INTO Marca (nombreMarca, id_Proveedor) VALUES
 ('MERCEDEZ', 1),
 ('FERRARI', 1),
 ('ASTON MARTIN', 2),
 ('RED BULL', 2),
 ('McLAREN', 1);
-
-
+--AGREGANDO REGISTROS
 INSERT INTO Producto (nombreProducto, id_Marca, precioProducto) VALUES
 ('ROPA', 1, 50.00),
 ('CASCOS', 2, 70.00),
@@ -45,8 +49,10 @@ INSERT INTO Producto (nombreProducto, id_Marca, precioProducto) VALUES
 ('GORRAS', 4, 5.00),
 ('SUDADERAS', 5, 60.00);
 
+--VISTAS
 CREATE VIEW productoMarcaPrecio AS
 
+--JOIN
 SELECT
 Producto.nombreProducto AS [PRODUCTO],
 Producto.precioProducto AS [PRECIO],
@@ -59,6 +65,7 @@ Marca ON Producto.id_Marca = Marca.idMarca
 INNER JOIN
 Proveedores ON Marca.id_Proveedor = Proveedores.idProveedor
 
+/* SUM - AVG - SUM */
 SELECT *FROM Producto WHERE nombreProducto LIKE 'G%';
 
 SELECT SUM (precioProducto) AS SumaTotal FROM Producto
